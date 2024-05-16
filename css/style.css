@@ -10,7 +10,7 @@
 }
 
 *{
-    font-family: 'Popppins-serif';
+    font-family: 'Popppins', sans-serif;
     margin:0; padding:0;
     box-sizing: border-box;
     outline: none; border:none;
@@ -59,7 +59,7 @@ html{
 .header.logo{
     font-size:2.5rem;
     color:var(--balck);
-    font-weight: bolder;
+    font-weight:border;
 }
 
 .header.logo span{
