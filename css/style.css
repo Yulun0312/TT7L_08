@@ -31,8 +31,8 @@ html{
     display: inline-black;
     margin-top: 1rem;
     border-radius: .5rem;
-    background: var(--lihgt-yellow);
-    =color:var(--black);
+    background: var(--light-yellow);
+    color:var(--black);
     font-weight: 500;
     font-size: 1.7rem;
     cursor: pointer;
@@ -40,7 +40,7 @@ html{
 }
 
 .btn:hover{
-    background:var(--yelow)
+    background: var(--yellow)
 }
 
 
@@ -56,13 +56,13 @@ html{
     padding:3ren 9%;
 }
 
-.header.logo{
-    font-size:2.5rem;
+.header .logo{
+    font-size: 2.5rem;
     color:var(--balck);
     font-weight:border;
 }
 
-.header.logo span{
+.header .logo span{
     color:var(--yellow);
 }
 
@@ -73,7 +73,7 @@ html{
 }
 
 header .navbar a:hover{
-    color:var(--yellow)
+    color:var(--yellow);
 }
 
 .header .btn{
