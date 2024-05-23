@@ -6,7 +6,15 @@ menu.onclick = () =>{
     navbar.clssliist.toggle('active');
 }
 
-menu.onscroll = () =>{
+document.querySelector('#login-btn').onclick = () =>{
+    document.querySelector('.login-form-container').classList.toggle('active');
+}
+
+document.querySelector('#close-login-form').onclick = () =>{
+    document.querySelector('.login-form-container').classList.remove('active');
+}
+
+window.onscroll = () =>{
 
     if(window.scrollY > 0){
         document.querySelector('.header').classList.add('active');
@@ -17,3 +25,24 @@ menu.onscroll = () =>{
     menu.clssliist.remove('fa-times');
     navbar.clssliist.toggle('active');
 }
+
+window.onload = () =>{
+
+    if(window.scrollY > 0){
+        document.querySelector('.header').classList.add('active');
+    }else{
+        document.querySelector('.header').classList.remove('active');
+    }
+
+}
+
+document.querySelector('.home').onmouseleave (e) =>{
+    document.querySelectorAll('.home-parallax').forEach(elm =>{
+
+        
+
+        elm.computedStyleMap.transform = 'translateX(0px) translateY(0px)'
+
+    });
+
+};
