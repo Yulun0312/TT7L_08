@@ -1,27 +1,43 @@
 <!DOCTYPE html>
-<html>
-   <head>
-      <title>Car Reviewer</title>
-      <link rel="stylesheet" href="css.css">
-   </head>
-   <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Reviewer</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
     <div id="header">
         <div id="title">
             Car Reviewer
         </div>
         <div id="header-middle">
-            <a href="categories.html">Categories</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="toplikes.html">Top Likes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="profile.html">Profile</a>
-        </div>
-        <div id="header-right">
+            <a href="categories.html">Categories</a>
+            <a href="toplikes.html">Top Likes</a>
+            <a href="profile.html">Profile</a>
+            <button id="login-button">Log In</button>
         </div>
     </div>
-    <br></br>
-    <form action="/action_page.php">
-        <p style="text-align:center">
-        <label for="search"></label>
-        <input type="text" id="search" name="search" placeholder="Search for the car you are looking for"><br><br>
-        <button type="button1">Search</button>
-   </body>
+
+    <div id="search-container">
+        <form action="/action_page.php">
+            <input type="text" id="search" name="search" placeholder="Search for the car you are looking for">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div id="trending">
+        <h2>Trending</h2>
+        <div class="product-card">
+            <img src="pear.jpg" alt="Product Image">
+            <div class="product-info">
+                <h3>Product</h3>
+                <p>Description of product</p>
+            </div>
+        </div>
+    </div>
+
+</body>
 </html>
 
 hahaha
