@@ -31,6 +31,10 @@ section{
     padding:2rem 9%;
 }
 
+section{
+    padding:2rem 9%;
+}
+
 .btn{
     display: inline-black;
     margin-top: 1rem;
@@ -179,7 +183,31 @@ header .navbar a:hover{
     cursor: pointer;
 }
 
+.home{
+    padding-top: 10rem;
+    text-align: center;
+    overflow-x: hidden;
+}
 
+.home h1{
+    font-size: 7.5vw;
+    text-transform: uppercase;
+    color: var(--black);
+}
+
+.home img{
+    width:100%;
+    margin:1rem 0;
+}
+
+.icons-container{
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap:1.5rem;
+    background: #eee;
+}
 
 
 
@@ -204,7 +232,7 @@ header .navbar a:hover{
     }
 
     .header.active{
-        padding: 2rem 9%;
+        padding: 2rem;
     }
 
     section{
