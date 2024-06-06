@@ -1,6 +1,6 @@
 <header>
     <link rel="stylesheet" href="homepage.css">
-    <script src="homepage.js"></script>
+    
     <nav>
         <a href="homepage.html" class="brand">Audi R8</a>
     <ul class="menu">
@@ -175,5 +175,43 @@
             <div class="inner-sm-circle"></div>
         </div>
     </div>
+    <script src="homepage.js"></script>
+    <link rel="stylesheet" href="homepage.css">
 </section>
+
+
+<div class="comment-box">
+    <h2>Leave a Comment</h2>
+    <form>
+      <input type="text" id="name" placeholder="Name">
+      <textarea id="comment" placeholder="Comment"></textarea>
+      <button onclick="">Submit</button>
+    </form>
+    <div class="comment-list">
+      <!-- comments will be displayed here -->
+    </div>
+  </div>
+
+
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyC7FWt5lhKF3Omc4deXzUxGUYxUkz_XSG4",
+        authDomain: "car-review-website.firebaseapp.com",
+        databaseURL: "https://car-review-website-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "car-review-website",
+        storageBucket: "car-review-website.appspot.com",
+        messagingSenderId: "320459252993",
+        appId: "1:320459252993:web:49670ccd2505873cdae700"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
+    const auth = getAuth(app);
+    
+
 
