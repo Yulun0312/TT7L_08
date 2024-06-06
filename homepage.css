@@ -45,13 +45,17 @@ section {
     padding: 2.5em;
 }
 
-nav, .infos, .info, .specs-header, .specs li, .stats {
+nav, .infos, .info,
+ .specs-header, .specs li, 
+ .stats {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.specs, .icon, .panel:first-child, .panel:last-child {
+.specs, .icon,
+ .panel:first-child,
+ .panel:last-child {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,14 +142,14 @@ nav a:hover {
 }
 
 .specs {
-    background:
-     url(img/banner2.jpg)
-     no-repeat center;
-    background-size: cover;
-    min-height: 40em;
-    position: relative;
-    padding-top: 8em;
-    padding-bottom: 8em;
+  background:
+    url(img/banner2.jpg)
+    no-repeat center;
+  background-size: cover;
+  min-height: 40em;
+  position: relative;
+  padding-top: 8em;
+  padding-bottom: 8em;
 }
 
 .specs-header, .specs ul {
