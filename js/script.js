@@ -1,6 +1,7 @@
 let menu = document.querySelector('#menu-btn');
 let navbar = document.querySelector('.navber');
 
+
 menu.onclick = () =>{
     menu.clssliist.toggle('fa-times');
     navbar.clssliist.toggle('active');
@@ -60,5 +61,6 @@ document.querySelector('.home').onmouseleave = ()  =>{
     });
     
 };
+
 
 

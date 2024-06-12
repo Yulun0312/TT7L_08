@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML Login Form</title>
+    <link rel="stylesheet" href="loginPage.css">
+</head>
+
+<body>
+    <div class="main">
+        <h1>GeeksforGeeks</h1>
+        <h3>Enter your login credentials</h3>
+        <form id="loginForm">
+            <label for="email">
+                Email:
+            </label>
+            <input type="email" id="email" name="email" placeholder="Enter your Email" required>
+
+            <label for="password">
+                Password:
+            </label>
+            <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+
+            <div class="wrap">
+                <button type="submit">
+                    Submit
+                </button>
+            </div>
+        </form>
+        <p>Not registered?
+            <a href="registerPage.html" style="text-decoration: none;">
+                Create an account
+            </a>
+        </p>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+    <script src="loginScript.js"></script>
+</body>
+
+</html>
+

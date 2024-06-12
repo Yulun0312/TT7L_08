@@ -23,8 +23,33 @@
         </nav>
         <div id="login-btn">
             <button class="btn">login</button>
-            <i class="far fa-user"></i>
         </div>
+        <nav>
+            <img src="image/images/user.png" class="user-pic" onclick="togglMenu()">
+
+            <div class="sub-menu-wrap" id="subMenu">
+                <div class="sub-menu">
+                    <div class="user-info">
+                        <img src="image/images/user.png">
+                        <h2>Member</h2>
+                    </div>
+                    <hr>
+
+                    <a href="#" class="sub-menu-link">
+                        <img src="image/images/profile.png"
+                        <p>Edit Profile</p>
+                        <span>></span>
+                    </a>
+
+                    <a href="#" class="sub-menu-link">
+                        <img src="image/images/logout.png"
+                        <p>Logout</p>
+                        <span>></span>
+                    </a>
+
+                </div>
+            </div>
+        </nav>
     </header>
 
     <!-- Login form -->
@@ -48,7 +73,7 @@
     <section class="home" id="home">
 
         <h1 class="home-parallax" data-speed="-2">find your car</h1>
-        <img class="home-parallax" data-speed="5" src="C:\Users\USER\Downloads\homepagePic.jpg" alt="">
+        <img class="home-parallax" data-speed="5" src="image\homepagePic.jpg" alt="">
         <a href="#" class="btn home-parallax" data-speed="7"> explore cars </a>
 
     </section>
@@ -175,7 +200,14 @@
                 evt.preventDefault();
                 register();
             });
+
+            document.getElemntById('close-login-form').addEventListner('click', () => {
+                hideLoginForm();
+            });
         });
+
+
+          
 
         function login() {
             let email = document.getElementById('email').value;
@@ -194,11 +226,17 @@
                     update(userRef, { last_login: Date.now() })
                         .then(() => {
                             alert('User Logged In!!');
+                            window.location.assign('PurchasePage.html');
                         });
                 })
                 .catch((error) => {
                     alert(error.message);
                 });
+        }
+
+        function hideLoginForm() {
+            const loginFormContainer = document.getElementById('login-form-container');
+            loginFormContainer.style.display = 'none';
         }
 
         function validate_email(email) {
@@ -230,8 +268,21 @@
                     alert(error.message);
                 });
         }
+
     </script>
 
     <script src="js/script.js"></script>
+
+    <script>
+        let subMenu = document.getElementById("subMenu");
+        function toggleMenu(){
+            subMenu.classList.toggle("open-menu");
+        }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.user-pic').addEventListener('click', toggleMenu);
+        });
+    </script>
+    
 </body>
 </html>
