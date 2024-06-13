@@ -4,13 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Reviewer</title>
+    <!-- Add Firebase products that you want to use -->
+    <script type="module">
+        // Import Firebase services
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbB73zNTbrSfZ16txDiGxlMCVo8fi7QRA",
+            authDomain: "tt7l-08.firebaseapp.com",
+            databaseURL: "https://tt7l-08-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "tt7l-08",
+            storageBucket: "tt7l-08.appspot.com",
+            messagingSenderId: "1091270759875",
+            appId: "1:1091270759875:web:be9cda99db91a22bec9976",
+            measurementId: "G-WVCJVHKGFX"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        // Initialize Firestore
+        const db = getFirestore(app);
+        
+        // Make db available globally for app.js
+        window.db = db;
+
+        console.log("Firebase initialized and Firestore set to window.db", db);
+    </script>
     <link rel="stylesheet" href="css.css">
 </head>
 <body>
     <div id="header">
-        <div id="title">
-            Car Reviewer
-        </div>
+        <div id="title">Car Reviewer</div>
         <div id="header-middle">
             <a href="home.html">Home</a>
             <a href="categories.html">Categories</a>
@@ -29,9 +58,10 @@
 
     <div id="trending">
         <h2>Trending</h2>
-        <div id="product-container">
-         </div>
+        <div id="trending-products"></div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Your custom script -->
+    <script type="module" src="app.js"></script>
 </body>
 </html>
