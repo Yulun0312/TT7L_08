@@ -9,8 +9,13 @@
         <li><a href="#">News</a></li>
         <li><a href="purchasePage.html" class="btn">Purchase</a></li>
     </ul>
+    
     <div class="menu-btn">
         <i class="fas fa-bars"></i>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+        <a href ="signin.html"><button class="btn btn-link" type="button">Signup</button></a>
+        <a href ="signup.html"><buttton class="btn btn-link" type="button" id="signoutbutton">Signin</buttton></a>
     </div>
     </nav>
     <div class="header body">
@@ -179,7 +184,7 @@
     <link rel="stylesheet" href="homepage.css">
 </section>
 
-
+<!--comment box navenesh-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -329,7 +334,31 @@
     // Fetch and display comments when the page loads
     fetchComments();
 </script>
+<!--weilee added-->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const userCreds = JSON.parse(sessionStorage.getItem("user-creds"));
+      const userInfo = JSON.parse(sessionStorage.getItem("user-info"));
+      const msgHead = document.getElementById("msg");
+      const greetHead = document.getElementById("greet");
+      const signoutBtn = document.getElementById("signoutbutton");
 
+      if (userCreds && userInfo) {
+        msgHead.innerText = `${userCreds.email} logged in`;
+        greetHead.innerText = `Welcome ${userInfo.firstname} ${userInfo.lastname}!`;
+      } else {
+        window.location.href = "signin.html";
+      }
+
+      const signOut = () => {
+        sessionStorage.removeItem("user-creds");
+        sessionStorage.removeItem("user-info");
+        window.location.href = "login.html";
+      };
+
+      signoutBtn.addEventListener("click", signOut);
+    });
+  </script>
 </body>
 </html>
 
