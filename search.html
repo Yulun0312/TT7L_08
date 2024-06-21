@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Reviewer</title>
+    <title>Car Reviewer - Search</title>
     <!-- Add Firebase products that you want to use -->
     <script type="module">
         // Import Firebase services
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
         import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js';
-        import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+        import { getFirestore, collection, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -34,13 +34,66 @@
         window.db = db;
 
         console.log("Firebase initialized and Firestore set to window.db", db);
+
+        // Function to handle saving history to localStorage
+        function saveToHistory(carDetails) {
+            let history = JSON.parse(localStorage.getItem('viewedCars')) || [];
+            history.push(carDetails);
+            localStorage.setItem('viewedCars', JSON.stringify(history));
+        }
+
+        // Function to retrieve and display history
+        function showHistory() {
+            let history = JSON.parse(localStorage.getItem('viewedCars')) || [];
+            console.log("Viewed Cars History:", history);
+            // Display or use history as needed, e.g., update UI
+            // For simplicity, log to console here
+        }
     </script>
     <link rel="stylesheet" href="css.css">
+    <style>
+        .product {
+            cursor: pointer;
+            border: 1px solid #ccc;
+            padding: 20px; /* Increased padding for better spacing */
+            margin: 20px; /* Increased margin for better spacing */
+            border-radius: 10px; /* Rounded corners */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 250px; /* Adjusted width for larger size */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow for depth */
+            transition: transform 0.3s ease-in-out; /* Smooth transform animation */
+        }
+
+        .product:hover {
+            transform: translateY(-5px); /* Lift the card on hover */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+        }
+
+        .products-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        #header-middle {
+            display: flex;
+            align-items: center;
+        }
+
+        #header-middle > a, 
+        #header-middle > button {
+            margin: 0 10px; /* Adjust spacing between links and buttons */
+        }
+    </style>
 </head>
 <body>
     <div id="header">
         <div id="title">Car Reviewer</div>
         <div id="header-middle">
+            <button id="view-history-button">View History</button>
             <a href="home.html">Home</a>
             <a href="categories.html">Categories</a>
             <a href="toplikes.html">Top Likes</a>
@@ -58,10 +111,16 @@
 
     <div id="trending">
         <h2>Trending</h2>
-        <div id="trending-products"></div>
+        <div id="products-container" class="products-container">
+            <!-- Products will be dynamically added here -->
+        </div>
     </div>
 
-    <!-- Your custom script -->
     <script type="module" src="app.js"></script>
+    <script>
+        document.getElementById('view-history-button').addEventListener('click', function() {
+            showHistory();
+        });
+    </script>
 </body>
 </html>
