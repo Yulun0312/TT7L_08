@@ -11,35 +11,43 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     console.log("Firestore has been initialized", window.db);
 
-    // Log the type and properties of db
-    console.log("Type of db:", typeof window.db);
-    console.dir(window.db);
-
     // Function to fetch and display products
     async function fetchProducts() {
         console.log("Fetching products from Firestore");
 
-        // Check if collection method exists on db
-        if (typeof collection !== 'function' || typeof getDocs !== 'function') {
-            console.error("Firestore methods are not correctly imported. Ensure collection and getDocs are available.");
-            return;
-        }
-
         try {
             const querySnapshot = await getDocs(collection(window.db, "products"));
-            const productsContainer = document.getElementById('trending-products');
+            console.log("Query Snapshot:", querySnapshot);
+
+            const productsContainer = document.getElementById('products-container');
             productsContainer.innerHTML = ''; // Clear existing content
+
+            if (querySnapshot.empty) {
+                console.log("No products found.");
+                return;
+            }
 
             querySnapshot.forEach((doc) => {
                 const product = doc.data();
+                console.log("Product:", product);
+
                 const productElement = document.createElement('div');
+                productElement.className = 'product';
+                productElement.id = `product-${doc.id}`; // Unique identifier for each product
                 productElement.innerHTML = `
-                    <div style="border: 1px solid #ccc; padding: 16px; margin: 16px; border-radius: 8px;">
-                        <img src="${product.imageURL}" alt="Product Image" style="width:100px;height:100px;">
-                        <h3>${product.name}</h3>
-                        <p>${product.description}</p>
-                    </div>
+                    <img src="${product.imageURL}" alt="Product Image">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
                 `;
+
+                // Add click event listener to each product
+                productElement.addEventListener('click', () => {
+                    // Handle click event, e.g., navigate to details page or perform action
+                    console.log(`Clicked on product: ${doc.id}`);
+                    // Example: Redirect to details page with product ID
+                    window.location.href = `details.html?id=${doc.id}`;
+                });
+
                 productsContainer.appendChild(productElement);
             });
         } catch (error) {
