@@ -1,3 +1,18 @@
+:root {
+    --box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    --border: 1px solid #ccc;
+    --black: #000;
+    --light-color: #999;
+    --yellow: #ff0;
+}
+
+html{
+    font-size: 72.5%;
+    overflow-x: hidden;
+    scroll-padding-top: 7rem;
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
@@ -12,7 +27,7 @@ body {
 }
 
 p {
-    font-size: 0.9em;
+    font-size: 1em;
     max-width: 35em;
     line-height: 27px;
 }
@@ -75,6 +90,98 @@ header {
 nav {
     padding: 1.5em 2.5em;
     position: relative;
+}
+
+.login-form-container{
+    position: fixed;
+    top:-105%; left:0;
+    z-index: 1000;
+    height: 100%;
+    width:100%;
+    background: rgba(255,255,255,.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.login-form-container.active{
+    top:0;
+    opacity: 1;
+    display: block;
+}
+
+.login-form-container form{
+    padding:2rem;
+    margin:2rem;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    background: #fff;
+    border:var(--border);
+    text-align: center;
+    width:40rem;
+}
+
+.login-form-container form .buttons{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.login-form-container form .btn{
+    display: block;
+    width: 100%;
+    margin: .5rem 0;
+}
+
+.login-form-container form h3{
+    color:var(--black);
+    font-size: 2.5rem;
+    padding-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.login-form-container form .box{
+    margin: .7rem 0;
+    width: 100%;
+    text-transform: none;
+    color:var(--black);
+    font-size: 1.6rem;
+    padding: 1rem 1.2rem;
+    border:var(--border);
+    border-radius: .5rem;
+}
+
+.login-form-container form p{
+    padding:1rem 1;
+    font-size: 1.5rem;
+    color:var(--light-color);
+}
+
+.login-form-container form p a{
+    color:var(--yellow);
+    text-decoration: underline;
+}
+
+.login-form-container #close-login-form{
+    position: absolute;
+    top: 1.5rem; right: 2.5rem;
+    font-size: 5rem;
+    color:var(--black);
+    cursor: pointer;
+}
+
+nav li button {
+    background: none;
+    border: none;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+nav li button:hover {
+    color: #eee;
 }
 
 .menu-btn {
@@ -422,6 +529,6 @@ nav a:hover {
 
 @media screen and (max-width: 600px) {
     html {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
