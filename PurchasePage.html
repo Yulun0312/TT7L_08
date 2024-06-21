@@ -123,14 +123,67 @@
 
 </section>
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+    }
+    .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .box img {
+        max-width: 100%;
+        border-radius: 10px;
+    }
+    .content {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .content h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .content .price {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    .content p {
+        font-size: 16px;
+        color: #666;
+    }
+    .content p .fas {
+        margin: 0 5px;
+        color: #888;
+    }
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: var(--light-color);
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
 <section class="vehicles" id="vehicles1">
-
     <h1 class="heading"> popular <span>vehicles</span></h1>
-
     <div class="vehicles-slide">
-
         <div class="wrapper">
-
             <div class="box">
                 <img src="image\car.png" alt="">
                 <div class="content">
@@ -143,7 +196,8 @@
                         <span class="fas fa-circle"></span> petrol
                         <span class="fas fa-circle"></span> 324km/h
                     </p>
-                    <a href="#" class="btn">check out</a>
+                    <a href="paymentPage/paymentPage.html" class="btn">check out</a>
+                    <a href="detailAudiR8.html" class="btn">Detail</a>
                 </div>
             </div>
         </div>
@@ -155,23 +209,49 @@
     <div class="vehicles-slide">
         <div class="wrapper">
             <div class="box">
-                <img src="image\car2.webp" alt="">
+                <img src="image\audiA3.webp" alt="">
                 <div class="content">
-                    <h3>new modal</h3>
-                    <div class="price"> <span>price: </span> RM288800/- </div>
+                    <h3>Audi A3 Sedan S line 2.0 TFSI</h3>
+                    <div class="price"> <span>price: </span> RM338990/- </div>
                     <p>
                         new
-                        <span class="fas fa-circle"></span> 2013
+                        <span class="fas fa-circle"></span> 2024
                         <span class="fas fa-circle"></span> automatic
                         <span class="fas fa-circle"></span> petrol
-                        <span class="fas fa-circle"></span> 317km/h
+                        <span class="fas fa-circle"></span> 240km/h
                     </p>
-                    <a href="#" class="btn">check out</a>
+                    <a href="paymentPage/paymentPage.html" class="btn">check out</a>
+                    <a href="detailAudiA3.html" class="btn">Detail</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<section class="vehicles" id="vehicles3">
+    <h1 class="heading"> popular <span>vehicles</span></h1>
+    <div class="vehicles-slide">
+        <div class="wrapper">
+            <div class="box">
+                <img src="image\AudiA7.jpeg" alt="">
+                <div class="content">
+                    <h3>Audi A7 Sportback S line 3.0 TFSI quattro</h3>
+                    <div class="price"> <span>price: </span> RM715990/- </div>
+                    <p>
+                        new
+                        <span class="fas fa-circle"></span> 2024
+                        <span class="fas fa-circle"></span> automatic
+                        <span class="fas fa-circle"></span> petrol
+                        <span class="fas fa-circle"></span> 250km/h
+                    </p>
+                    <a href="paymentPage/paymentPage.html" class="btn">check out</a>
+                    <a href="car detail/detailAudiA7.html" class="btn">Detail</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 
     <!-- Additional sections omitted for brevity -->

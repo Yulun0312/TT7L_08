@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Technical Specifications</h2>
+
+<table>
+  <tr>
+    <th>Engine displacement</th>
+    <th>5240</th>
+  </tr>
+  <tr>
+    <td>Maximum power</td>
+    <td>601.4 bhp @ 8250 rpm<</td>
+  </tr>
+  <tr>
+    <td>Maximum torque</td>
+    <td>560 Nm @ 6500 rpm</td>
+  </tr>
+  <tr>
+    <td>Turning radius</td>
+    <td>5.9 m</td>
+  </tr>
+  <tr>
+    <td>No. of cylinders</td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td>Drivetrain</td>
+    <td>AWD</td>
+  </tr>
+  <tr>
+    <td>Turbo Charger</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>Super Charger</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>Fuel Supply</td>
+    <td>Direct Injection</td>
+  </tr>
+</table>
+
+</body>
+</html>
