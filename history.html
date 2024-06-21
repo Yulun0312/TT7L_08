@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Reviewer - History</title>
+    <script type="module">
+        // Import Firebase services
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js';
+        import { getFirestore, collection, getDocs, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbB73zNTbrSfZ16txDiGxlMCVo8fi7QRA",
+            authDomain: "tt7l-08.firebaseapp.com",
+            databaseURL: "https://tt7l-08-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "tt7l-08",
+            storageBucket: "tt7l-08.appspot.com",
+            messagingSenderId: "1091270759875",
+            appId: "1:1091270759875:web:be9cda99db91a22bec9976",
+            measurementId: "G-WVCJVHKGFX"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        // Initialize Firestore
+        const db = getFirestore(app);
+        
+        // Make db available globally for app.js
+        window.db = db;
+
+        console.log("Firebase initialized and Firestore set to window.db", db);
+    </script>
+    <link rel="stylesheet" href="css.css">
+    <style>
+        #history-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .history-item {
+            border: 1px solid #ccc;
+            padding: 16px;
+            margin: 16px;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .history-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 16px;
+        }
+
+        .history-item h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div id="title">Car Reviewer</div>
+        <div id="header-middle">
+            <a href="home.html">Home</a>
+            <a href="categories.html">Categories</a>
+            <a href="toplikes.html">Top Likes</a>
+            <a href="profile.html">Profile</a>
+            <a href="search.html">Search</a>
+        </div>
+    </div>
+
+    <div id="history-container">
+        <h2>Viewed History</h2>
+        <div id="history-items"></div>
+    </div>
+
+    <script type="module">
+        import { collection, getDocs, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            console.log("DOM fully loaded and parsed");
+
+            // Ensure the global db variable is available
+            if (typeof window.db === 'undefined') {
+                console.error("Firestore has not been initialized. Make sure the db variable is correctly set in your HTML file.");
+                return;
+            }
+
+            console.log("Firestore has been initialized", window.db);
+
+            // Function to fetch and display history
+            async function fetchHistory() {
+                console.log("Fetching viewed history from Firestore");
+
+                try {
+                    const historySnapshot = await getDocs(collection(window.db, "viewedHistory"));
+                    const historyContainer = document.getElementById('history-items');
+                    historyContainer.innerHTML = ''; // Clear existing content
+
+                    for (const doc of historySnapshot.docs) {
+                        const historyData = doc.data();
+                        const carDoc = await getDoc(doc(window.db, "products", historyData.carId));
+                        if (carDoc.exists()) {
+                            const carData = carDoc.data();
+                            const historyElement = document.createElement('div');
+                            historyElement.classList.add('history-item');
+                            historyElement.innerHTML = `
+                                <img src="${carData.imageURL}" alt="Car Image">
+                                <div>
+                                    <h3>${carData.name}</h3>
+                                    <p>${carData.description}</p>
+                                    <p>Viewed on: ${new Date(historyData.viewedAt.seconds * 1000).toLocaleString()}</p>
+                                </div>
+                            `;
+                            historyContainer.appendChild(historyElement);
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error fetching viewed history: ", error);
+                }
+            }
+
+            // Call the fetchHistory function to load history on page load
+            fetchHistory();
+        });
+    </script>
+</body>
+</html>
