@@ -205,7 +205,6 @@
             border-radius: 5px;
             background-color: #fff;
         }
-        .comment-box input[type="text"],
         .comment-box textarea {
             width: 100%;
             padding: 10px;
@@ -258,8 +257,6 @@
 
 <div class="comment-box">
     <form id="commentForm">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required><br>
         <label for="comment">Comment:</label><br>
         <textarea id="comment" name="comment" placeholder="Write your comment here..." required></textarea><br>
         <button type="submit">Submit</button>
@@ -279,86 +276,82 @@
     // Your web app's Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyC7FWt5lhKF3Omc4deXzUxGUYxUkz_XSG4",
-        authDomain: "car-review-website.firebaseapp.com",
-        databaseURL: "https://car-review-website-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "car-review-website",
-        storageBucket: "car-review-website.appspot.com",
-        messagingSenderId: "320459252993",
-        appId: "1:320459252993:web:49670ccd2505873cdae700"
+  authDomain: "car-review-website.firebaseapp.com",
+  databaseURL: "https://car-review-website-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "car-review-website",
+  storageBucket: "car-review-website.appspot.com",
+  messagingSenderId: "320459252993",
+  appId: "1:320459252993:web:49670ccd2505873cdae700"
     };
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
 
-    // Handle form submission
-    document.getElementById('commentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+    // Ensure user is signed in and get user info
+    document.addEventListener("DOMContentLoaded", () => {
+        const userCreds = JSON.parse(sessionStorage.getItem("user-creds"));
+        const userInfo = JSON.parse(sessionStorage.getItem("user-info"));
+        const signoutBtn = document.getElementById("signoutbutton");
 
-        const username = document.getElementById('username').value;
-        const comment = document.getElementById('comment').value;
+        if (!userCreds || !userInfo) {
+            window.location.href = "signin.html";
+            return;
+        }
 
-        // Create a unique ID for each comment
-        const commentId = Date.now().toString();
+        const username = `${userInfo.firstname} ${userInfo.lastname}`;
 
-        // Save the comment to the database
-        set(ref(database, 'comments/' + commentId), {
-            username: username,
-            comment: comment
-        }).then(() => {
-            alert('Comment submitted successfully!');
-            document.getElementById('commentForm').reset();
-            fetchComments(); // Fetch comments to update the display
-        }).catch((error) => {
-            alert('Error submitting comment: ' + error);
+        // Handle form submission
+        document.getElementById('commentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const comment = document.getElementById('comment').value;
+
+            // Create a unique ID for each comment
+            const commentId = Date.now().toString();
+
+            // Save the comment to the database
+            set(ref(database, 'comments/' + commentId), {
+                username: username,
+                comment: comment
+            }).then(() => {
+                alert('Comment submitted successfully!');
+                document.getElementById('commentForm').reset();
+                fetchComments(); // Fetch comments to update the display
+            }).catch((error) => {
+                alert('Error submitting comment: ' + error);
+            });
         });
+
+        // Function to fetch and display comments
+        function fetchComments() {
+            const commentsRef = ref(database, 'comments/');
+            onValue(commentsRef, (snapshot) => {
+                const commentsDisplay = document.getElementById('commentsDisplay');
+                commentsDisplay.innerHTML = '<h2>Comments</h2>'; // Clear previous comments and add title
+                const comments = snapshot.val();
+                for (const id in comments) {
+                    const commentData = comments[id];
+                    const commentElement = document.createElement('div');
+                    commentElement.className = 'comment';
+                    commentElement.innerHTML = `<strong>${commentData.username}</strong><p>${commentData.comment}</p>`;
+                    commentsDisplay.appendChild(commentElement);
+                }
+            });
+        }
+
+        // Fetch and display comments when the page loads
+        fetchComments();
     });
 
-    // Function to fetch and display comments
-    function fetchComments() {
-        const commentsRef = ref(database, 'comments/');
-        onValue(commentsRef, (snapshot) => {
-            const commentsDisplay = document.getElementById('commentsDisplay');
-            commentsDisplay.innerHTML = '<h2>Comments</h2>'; // Clear previous comments and add title
-            const comments = snapshot.val();
-            for (const id in comments) {
-                const commentData = comments[id];
-                const commentElement = document.createElement('div');
-                commentElement.className = 'comment';
-                commentElement.innerHTML = `<strong>${commentData.username}</strong><p>${commentData.comment}</p>`;
-                commentsDisplay.appendChild(commentElement);
-            }
-        });
-    }
-
-    // Fetch and display comments when the page loads
-    fetchComments();
-</script>
-<!--weilee added-->
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const userCreds = JSON.parse(sessionStorage.getItem("user-creds"));
-      const userInfo = JSON.parse(sessionStorage.getItem("user-info"));
-      const msgHead = document.getElementById("msg");
-      const greetHead = document.getElementById("greet");
-      const signoutBtn = document.getElementById("signoutbutton");
-
-      if (userCreds && userInfo) {
-        msgHead.innerText = `${userCreds.email} logged in`;
-        greetHead.innerText = `Welcome ${userInfo.firstname} ${userInfo.lastname}!`;
-      } else {
-        window.location.href = "signin.html";
-      }
-
-      const signOut = () => {
+    // Sign out functionality
+    document.getElementById("signoutbutton").addEventListener("click", () => {
         sessionStorage.removeItem("user-creds");
         sessionStorage.removeItem("user-info");
-        window.location.href = "login.html";
-      };
-
-      signoutBtn.addEventListener("click", signOut);
+        window.location.href = "signin.html";
     });
-  </script>
+</script>
+
 </body>
 </html>
 
