@@ -14,8 +14,8 @@
         <i class="fas fa-bars"></i>
     </div>
     <div class="d-grid gap-2 d-md-block">
-        <a href ="signin.html"><button class="btn btn-link" type="button">Signup</button></a>
-        <a href ="signup.html"><buttton class="btn btn-link" type="button" id="signoutbutton">Signin</buttton></a>
+        <a href ="signin.html"><button class="btn btn-link" type="button">Sign Out</button></a>
+        <a href ="signup.html"><buttton class="btn btn-link" type="button" id="signoutbutton">Sign Up</buttton></a>
     </div>
     </nav>
     <div class="header body">
@@ -256,7 +256,7 @@
 <body>
 
 <div class="comment-box">
-    <form id="commentForm">
+    <form id="commentForm"> <!--The form for submitting comments-->
         <label for="comment">Comment:</label><br>
         <textarea id="comment" name="comment" placeholder="Write your comment here..." required></textarea><br>
         <button type="submit">Submit</button>
@@ -276,12 +276,12 @@
     // Your web app's Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyC7FWt5lhKF3Omc4deXzUxGUYxUkz_XSG4",
-  authDomain: "car-review-website.firebaseapp.com",
-  databaseURL: "https://car-review-website-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "car-review-website",
-  storageBucket: "car-review-website.appspot.com",
-  messagingSenderId: "320459252993",
-  appId: "1:320459252993:web:49670ccd2505873cdae700"
+        authDomain: "car-review-website.firebaseapp.com",
+        databaseURL: "https://car-review-website-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "car-review-website",
+        storageBucket: "car-review-website.appspot.com",
+        messagingSenderId: "320459252993",
+        appId: "1:320459252993:web:49670ccd2505873cdae700"
     };
 
     // Initialize Firebase
@@ -290,10 +290,12 @@
 
     // Ensure user is signed in and get user info
     document.addEventListener("DOMContentLoaded", () => {
-        const userCreds = JSON.parse(sessionStorage.getItem("user-creds"));
+        // Retrieves and parses the user's credentials stored in session storage.
+        const userCreds = JSON.parse(sessionStorage.getItem("user-creds")); 
         const userInfo = JSON.parse(sessionStorage.getItem("user-info"));
         const signoutBtn = document.getElementById("signoutbutton");
 
+// Redirects to the sign-in page if the user credentials or info are not found in session storage.
         if (!userCreds || !userInfo) {
             window.location.href = "signin.html";
             return;
@@ -307,7 +309,7 @@
 
             const comment = document.getElementById('comment').value;
 
-            // Create a unique ID for each comment
+            // Create a unique ID for each comment using the current timestamp
             const commentId = Date.now().toString();
 
             // Save the comment to the database
@@ -326,14 +328,17 @@
         // Function to fetch and display comments
         function fetchComments() {
             const commentsRef = ref(database, 'comments/');
+            //Adds a listener to fetch comments whenever there's a change in the comments node.
             onValue(commentsRef, (snapshot) => {
                 const commentsDisplay = document.getElementById('commentsDisplay');
                 commentsDisplay.innerHTML = '<h2>Comments</h2>'; // Clear previous comments and add title
+                // Display Each Comment:
                 const comments = snapshot.val();
                 for (const id in comments) {
                     const commentData = comments[id];
                     const commentElement = document.createElement('div');
                     commentElement.className = 'comment';
+                    //Sets the inner HTML to display the username and comment.
                     commentElement.innerHTML = `<strong>${commentData.username}</strong><p>${commentData.comment}</p>`;
                     commentsDisplay.appendChild(commentElement);
                 }
@@ -348,7 +353,7 @@
     document.getElementById("signoutbutton").addEventListener("click", () => {
         sessionStorage.removeItem("user-creds");
         sessionStorage.removeItem("user-info");
-        window.location.href = "signin.html";
+        window.location.href = "signin.html"; //Redirects the user to the sign-in page.
     });
 </script>
 
